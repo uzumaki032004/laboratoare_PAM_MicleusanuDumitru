@@ -17,8 +17,8 @@ class GemStoreApp extends StatelessWidget {
       useMaterial3: true,
       scaffoldBackgroundColor: Colors.white,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF3A2C27),
-        primary: const Color(0xFF3A2C27),
+        seedColor: const Color(0xFF333333),
+        primary: const Color(0xFF333333),
         surface: Colors.white,
       ),
       appBarTheme: const AppBarTheme(

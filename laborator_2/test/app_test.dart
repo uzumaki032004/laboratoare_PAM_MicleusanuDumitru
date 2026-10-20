@@ -47,20 +47,26 @@ void main() {
     final store = Store()..toggleFavorite(products.first);
     await tester.pumpWidget(GemStoreApp(store: store));
     await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('menu')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Search / All products'));
+    await tester.pumpAndSettle();
     await tester.enterText(find.byKey(const Key('search')), 'nu-exista');
     await tester.pumpAndSettle();
-    expect(find.textContaining('Nu am găsit produse'), findsOneWidget);
+    expect(find.textContaining('No products found'), findsOneWidget);
     await tester.enterText(find.byKey(const Key('search')), '');
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.byTooltip('Arată favoritele'));
+    await tester.pageBack();
     await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip('Arată favoritele'));
+    await tester.tap(find.byKey(const Key('menu')));
     await tester.pumpAndSettle();
-    expect(find.text('1 produse'), findsOneWidget);
+    await tester.tap(find.text('Favorites'));
+    await tester.pumpAndSettle();
+    expect(find.text('1 product'), findsOneWidget);
     expect(find.byKey(const Key('product-sweater')), findsOneWidget);
     await tester.tap(find.byTooltip('Elimină din favorite'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Nu am găsit produse'), findsOneWidget);
+    expect(find.textContaining('No products found'), findsOneWidget);
   });
 
   testWidgets(
@@ -86,4 +92,29 @@ void main() {
       expect(tester.takeException(), isNull);
     },
   );
+
+  testWidgets('secțiunile Figma și produsul Sportwear Set sunt accesibile', (
+    tester,
+  ) async {
+    final store = Store();
+    await tester.pumpWidget(GemStoreApp(store: store));
+    await tester.pumpAndSettle();
+    expect(find.text('Feature Products'), findsOneWidget);
+    expect(find.text('Recommended'), findsOneWidget);
+    expect(find.text('Top Collection'), findsOneWidget);
+    await tester.ensureVisible(find.byKey(const Key('product-sportswear')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('product-sportswear')));
+    await tester.pumpAndSettle();
+    expect(find.text('Sportwear Set'), findsOneWidget);
+    expect(find.text(r'$ 80.00'), findsOneWidget);
+    expect(find.text('Description'), findsOneWidget);
+    expect(find.text('Reviews'), findsOneWidget);
+    expect(find.text('Similar Product'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('add-to-cart')));
+    await tester.pumpAndSettle();
+    expect(store.cart.single.size, 'L');
+    expect(store.cart.single.color, 'Bej');
+    expect(tester.takeException(), isNull);
+  });
 }

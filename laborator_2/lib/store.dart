@@ -19,13 +19,15 @@ class Product {
     required this.image,
     required this.category,
     required this.description,
+    this.detailImage,
     this.sizes = const ['S', 'M', 'L', 'XL'],
-    this.colors = const ['Negru', 'Bej', 'Albastru'],
+    this.colors = const ['Bej', 'Negru', 'Roșu'],
   });
   final String id;
   final String name;
   final int priceCents;
   final String image;
+  final String? detailImage;
   final Category category;
   final String description;
   final List<String> sizes;
@@ -53,9 +55,10 @@ const products = [
   ),
   Product(
     id: 'sportswear',
-    name: 'Sportswear Set',
+    name: 'Sportwear Set',
     priceCents: 8000,
     image: 'imagine5.png',
+    detailImage: 'imagine14.png',
     category: Category.sets,
     description:
         'Set sport cu libertate de mișcare, potrivit pentru antrenament și relaxare. Două piese ușor de combinat.',
@@ -102,6 +105,46 @@ const products = [
     image: 'imagine13.png',
     category: Category.dresses,
     description: 'Rochie albă cu design asimetric pentru ocazii speciale.',
+  ),
+  Product(
+    id: 'white-hoodie',
+    name: 'White fashion hoodie',
+    priceCents: 2900,
+    image: 'imaginea7.png',
+    category: Category.knitwear,
+    description: 'A soft white hoodie for relaxed, everyday outfits.',
+  ),
+  Product(
+    id: 'cotton-tee',
+    name: 'Cotton T-shirt',
+    priceCents: 3000,
+    image: 'imaginea8.png',
+    category: Category.basics,
+    description: 'An everyday cotton T-shirt with a comfortable fit.',
+  ),
+  Product(
+    id: 'rise-hoodie',
+    name: 'Rise Crop Hoodie',
+    priceCents: 4300,
+    image: 'imagine17.png',
+    category: Category.sets,
+    description: 'A cropped training hoodie for effortless movement.',
+  ),
+  Product(
+    id: 'gym-top',
+    name: 'Gym Crop Top',
+    priceCents: 3999,
+    image: 'imagine18.png',
+    category: Category.basics,
+    description: 'A lightweight cropped top for your daily workout.',
+  ),
+  Product(
+    id: 'sport-sweatshirt',
+    name: 'Sport Sweatshirt',
+    priceCents: 4799,
+    image: 'imagine19.png',
+    category: Category.knitwear,
+    description: 'A comfortable sweatshirt for warming up and cooling down.',
   ),
 ];
 
