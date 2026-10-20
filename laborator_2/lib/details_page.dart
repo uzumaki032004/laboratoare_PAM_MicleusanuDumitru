@@ -24,6 +24,44 @@ class _DetailsPageState extends State<DetailsPage> {
   int _photo = 0;
   bool _readMore = false;
   bool _newest = true;
+  final List<String> _writtenReviews = [];
+
+  Future<void> _writeReview() async {
+    String message = '';
+    final review = await showDialog<String>(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, update) => AlertDialog(
+          title: const Text('Write a review'),
+          content: TextField(
+            key: const Key('review-input'),
+            maxLines: 3,
+            decoration: const InputDecoration(
+              labelText: 'Your review',
+              hintText: 'Tell us about the product',
+            ),
+            onChanged: (value) => update(() => message = value.trim()),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              key: const Key('submit-review'),
+              onPressed: message.isEmpty
+                  ? null
+                  : () => Navigator.pop(context, message),
+              child: const Text('Post review'),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (review != null && mounted) {
+      setState(() => _writtenReviews.insert(0, review));
+    }
+  }
 
   Color _swatch(String color) => switch (color) {
     'Bej' => const Color(0xFFE7BEA6),
@@ -205,14 +243,13 @@ class _DetailsPageState extends State<DetailsPage> {
                       ],
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.vertical(
+                  Material(
+                    color: Colors.white,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
                         top: Radius.circular(20),
                       ),
-                      border: Border.all(color: const Color(0xFFF2F2F2)),
+                      side: BorderSide(color: Color(0xFFF2F2F2)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -457,11 +494,22 @@ class _DetailsPageState extends State<DetailsPage> {
                                   const SizedBox(height: 18),
                                   Row(
                                     children: [
-                                      const Expanded(
+                                      Expanded(
                                         child: Text(
-                                          '47 REVIEWS',
-                                          style: TextStyle(
+                                          '${47 + _writtenReviews.length} REVIEWS',
+                                          style: const TextStyle(
                                             fontSize: 10,
+                                            color: Color(0xFFAAAAAA),
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        key: const Key('write-review'),
+                                        onPressed: _writeReview,
+                                        child: const Text(
+                                          'WRITE A REVIEW',
+                                          style: TextStyle(
+                                            fontSize: 9,
                                             color: Color(0xFFAAAAAA),
                                           ),
                                         ),
@@ -486,9 +534,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                             vertical: 12,
                                           ),
                                           child: Text(
-                                            _newest
-                                                ? 'WRITE A REVIEW  ⌄  NEWEST'
-                                                : 'WRITE A REVIEW  ⌄  OLDEST',
+                                            _newest ? '⌄' : '⌃',
                                             style: const TextStyle(
                                               fontSize: 9,
                                               color: Color(0xFFAAAAAA),
@@ -498,6 +544,27 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                     ],
                                   ),
+                                  for (final review
+                                      in (_newest
+                                          ? _writtenReviews
+                                          : _writtenReviews.reversed))
+                                    ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: const CircleAvatar(
+                                        child: Icon(Icons.person_outline),
+                                      ),
+                                      title: const Text(
+                                        'You · just now',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      subtitle: Text(
+                                        review,
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          height: 1.7,
+                                        ),
+                                      ),
+                                    ),
                                   for (final review
                                       in (_newest
                                           ? const [0, 1]

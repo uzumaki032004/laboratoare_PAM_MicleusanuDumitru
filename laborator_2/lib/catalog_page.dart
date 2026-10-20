@@ -40,6 +40,7 @@ class CatalogPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       toolbarHeight: 76,
+      leadingWidth: 84,
       leading: Builder(
         builder: (context) => IconButton(
           key: const Key('menu'),
@@ -142,6 +143,7 @@ class CatalogPage extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 40),
             child: Column(
               children: [
+                const SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Row(

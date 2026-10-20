@@ -115,6 +115,17 @@ void main() {
     await tester.pumpAndSettle();
     expect(store.cart.single.size, 'L');
     expect(store.cart.single.color, 'Bej');
+    await tester.ensureVisible(find.byKey(const Key('write-review')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('write-review')));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const Key('review-input')),
+      'Looks great for the demo',
+    );
+    await tester.tap(find.byKey(const Key('submit-review')));
+    await tester.pumpAndSettle();
+    expect(find.text('Looks great for the demo'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }

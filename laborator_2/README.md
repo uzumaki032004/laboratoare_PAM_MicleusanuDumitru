@@ -17,6 +17,7 @@ Design: [Laboratoare 2026 — node 2:426](https://www.figma.com/design/3HeBH74VC
 - Adăugare/eliminare favorite și vizualizarea produselor favorite.
 - Deschiderea detaliilor pentru fiecare produs.
 - Pagina **Sportwear Set — $80.00**, fotografia mare, galerie derulabilă, culori și mărimi circulare, **Description / Read more**, **Reviews**, barele de evaluare, două recenzii demonstrative, sortare și **Similar Product**.
+- **Write a review** permite adăugarea unui comentariu local în ecranul produsului; comentariul nu este trimis la un server și se resetează când închizi ecranul.
 - Selectarea mărimii și culorii și adăugarea prin **Add To Cart**. Pentru Sportwear Set sunt selectate inițial mărimea L și culoarea Bej, ca în captură.
 - Coș comun tuturor ecranelor, cu variante separate și reunirea produselor identice.
 - Schimbarea cantității, eliminarea produselor și calcularea exactă a totalului în cenți.
