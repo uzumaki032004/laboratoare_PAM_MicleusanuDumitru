@@ -102,7 +102,9 @@ class _DetailsPageState extends State<DetailsPage> {
                               color: Color(0xFFB58B43),
                             ),
                             SizedBox(width: 6),
-                            Text('4.8 · Recenzie demonstrativă'),
+                            Flexible(
+                              child: Text('4.8 · Recenzie demonstrativă'),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 24),

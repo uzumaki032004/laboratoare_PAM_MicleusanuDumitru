@@ -72,10 +72,12 @@ void main() {
       final store = Store();
       await tester.pumpWidget(GemStoreApp(store: store));
       await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Catalog pe ecran mic');
       await tester.ensureVisible(find.byKey(const Key('product-sweater')));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('product-sweater')));
       await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Detalii pe ecran mic');
       await tester.tap(find.byKey(const Key('add-to-cart')));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('open-cart')).last);
