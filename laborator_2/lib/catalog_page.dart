@@ -135,7 +135,8 @@ class CatalogPage extends StatelessWidget {
       ),
     ),
     body: SafeArea(
-      child: Center(
+      child: Align(
+        alignment: Alignment.topCenter,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 430),
           child: SingleChildScrollView(
@@ -169,24 +170,16 @@ class CatalogPage extends StatelessWidget {
                                   height: 44,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: entry.$1 == 'Women'
-                                        ? const Color(0xFF3A2C27)
-                                        : const Color(0xFFF7F7F7),
+                                    color: Colors.white,
                                     border: Border.all(
                                       color: entry.$1 == 'Women'
                                           ? const Color(0xFF3A2C27)
                                           : const Color(0xFFF2F2F2),
                                     ),
                                   ),
-                                  padding: const EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(3),
                                   child: SvgPicture.asset(
                                     'assets/icons/${entry.$2}',
-                                    colorFilter: ColorFilter.mode(
-                                      entry.$1 == 'Women'
-                                          ? Colors.white
-                                          : const Color(0xFFCDCDCD),
-                                      BlendMode.srcIn,
-                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 8),

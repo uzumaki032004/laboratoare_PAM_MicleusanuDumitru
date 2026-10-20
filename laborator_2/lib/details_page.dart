@@ -122,7 +122,8 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       body: SafeArea(
         bottom: false,
-        child: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 430),
             child: SingleChildScrollView(
@@ -130,7 +131,7 @@ class _DetailsPageState extends State<DetailsPage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 390,
+                    height: 406,
                     child: Stack(
                       children: [
                         Positioned(

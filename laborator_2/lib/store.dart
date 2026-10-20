@@ -59,6 +59,7 @@ const products = [
     priceCents: 8000,
     image: 'imagine5.png',
     detailImage: 'imagine14.png',
+    sizes: ['S', 'M', 'L'],
     category: Category.sets,
     description:
         'Set sport cu libertate de mișcare, potrivit pentru antrenament și relaxare. Două piese ușor de combinat.',
