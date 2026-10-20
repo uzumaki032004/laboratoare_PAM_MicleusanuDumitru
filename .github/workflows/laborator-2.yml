@@ -1,0 +1,39 @@
+name: Verificare laborator 2
+on:
+  push:
+    branches: [main]
+    paths: ['laborator_2/**', '.github/workflows/laborator-2.yml']
+  pull_request:
+    branches: [main]
+    paths: ['laborator_2/**', '.github/workflows/laborator-2.yml']
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: laborator_2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build web --no-web-resources-cdn
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gemstore-lab2-web
+          path: laborator_2/build/web
+      - run: flutter build apk --debug --split-per-abi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gemstore-lab2-apk
+          path: laborator_2/build/app/outputs/flutter-apk/app-*-debug.apk
