@@ -710,7 +710,7 @@ class _Review extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 18),
+    padding: const EdgeInsets.symmetric(vertical: 40),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -484,7 +484,7 @@ class _CollectionBanner extends StatelessWidget {
                 width: fullWidth ? 170 : 150,
                 child: Image.asset(
                   'assets/images/$image',
-                  fit: BoxFit.contain,
+                  fit: fullWidth ? BoxFit.cover : BoxFit.contain,
                   alignment: Alignment.bottomRight,
                 ),
               ),
