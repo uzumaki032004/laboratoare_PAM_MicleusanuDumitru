@@ -11,12 +11,15 @@ void main() {
     await tester.pumpWidget(GemStoreApp(store: store));
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.byKey(const Key('product-sweater')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('product-sweater')));
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.byKey(const Key('size-L')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('size-L')));
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.byKey(const Key('color-Bej')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('color-Bej')));
     await tester.tap(find.byKey(const Key('add-to-cart')));
     await tester.pumpAndSettle();
@@ -30,6 +33,7 @@ void main() {
     expect(find.byKey(const Key('cart-total')), findsOneWidget);
     expect(store.totalCents, 7998);
     await tester.ensureVisible(find.byKey(const Key('checkout')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('checkout')));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Confirmă demo'));
@@ -49,6 +53,7 @@ void main() {
     await tester.enterText(find.byKey(const Key('search')), '');
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.byTooltip('Arată favoritele'));
+    await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Arată favoritele'));
     await tester.pumpAndSettle();
     expect(find.text('1 produse'), findsOneWidget);
@@ -68,6 +73,7 @@ void main() {
       await tester.pumpWidget(GemStoreApp(store: store));
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.byKey(const Key('product-sweater')));
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('product-sweater')));
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('add-to-cart')));
