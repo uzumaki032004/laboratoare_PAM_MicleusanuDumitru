@@ -25,6 +25,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(store.cart.single.size, 'L');
     expect(store.cart.single.color, 'Bej');
+    await tester.ensureVisible(find.byKey(const Key('open-cart')).last);
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('open-cart')).last);
     await tester.pumpAndSettle();
     expect(find.text('L · Bej'), findsOneWidget);
