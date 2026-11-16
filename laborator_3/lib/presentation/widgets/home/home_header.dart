@@ -88,7 +88,7 @@ class HomeHeaderBar extends StatelessWidget {
               fallbackIcon: Icons.person_rounded,
             ),
           ),
-          if (menu != null) menu!,
+          ?menu,
         ],
       ),
     );
