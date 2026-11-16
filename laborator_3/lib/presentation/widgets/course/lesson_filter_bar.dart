@@ -20,30 +20,27 @@ class LessonFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
+      // Wrap trece filtrele pe rândul următor pe ecrane înguste, astfel
+      // încât niciun filtru nu rămâne ascuns sub butonul de sortare.
       Expanded(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              for (final option in LessonFilter.values)
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ChoiceChip(
-                    label: Text(option.label),
-                    selected: option == filter,
-                    onSelected: (_) => onFilterChanged(option),
-                    selectedColor: AppColors.primaryLight,
-                    labelStyle: TextStyle(
-                      color: option == filter
-                          ? AppColors.primary
-                          : AppColors.dark,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+        child: Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final option in LessonFilter.values)
+              ChoiceChip(
+                label: Text(option.label),
+                selected: option == filter,
+                onSelected: (_) => onFilterChanged(option),
+                selectedColor: AppColors.primaryLight,
+                labelStyle: TextStyle(
+                  color: option == filter ? AppColors.primary : AppColors.dark,
+                  fontWeight: FontWeight.w600,
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
       PopupMenuButton<LessonSort>(

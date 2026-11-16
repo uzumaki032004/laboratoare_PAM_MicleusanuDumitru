@@ -51,8 +51,12 @@ Future<void> scrollTo(
   await tester.pumpAndSettle();
 }
 
-Future<void> tapVisible(WidgetTester tester, Finder finder) async {
-  await scrollTo(tester, finder);
+Future<void> tapVisible(
+  WidgetTester tester,
+  Finder finder, {
+  double delta = 150,
+}) async {
+  await scrollTo(tester, finder, delta: delta);
   await tester.tap(finder);
   await tester.pumpAndSettle();
 }
@@ -175,7 +179,7 @@ void main() {
 
     await tester.pageBack();
     await tester.pumpAndSettle();
-    await tapVisible(tester, find.text('Description'));
+    await tapVisible(tester, find.text('Description'), delta: -150);
     await scrollTo(tester, find.text('No description yet'));
   });
 
@@ -189,5 +193,25 @@ void main() {
     await tester.tap(find.text('Retry'));
     await tester.pumpAndSettle();
     await scrollTo(tester, find.text('Introduction to React'));
+  });
+
+  testWidgets('toate filtrele sunt vizibile complet pe ecran îngust', (
+    tester,
+  ) async {
+    await pumpNarrow(tester, FakeLearningRepository());
+    await tapVisible(tester, find.text('My courses'));
+    await tester.ensureVisible(find.byTooltip('Sort lessons'));
+    await tester.pumpAndSettle();
+
+    // Toate chip-urile sunt măsurate în aceeași poziție, fără derulare,
+    // deci un filtru ascuns sub butonul de sortare face testul să pice.
+    final sort = tester.getRect(find.byTooltip('Sort lessons'));
+    for (final filter in LessonFilter.values) {
+      final rect = tester.getRect(
+        find.widgetWithText(ChoiceChip, filter.label),
+      );
+      expect(rect.left, greaterThanOrEqualTo(0), reason: filter.label);
+      expect(rect.right, lessThanOrEqualTo(sort.left), reason: filter.label);
+    }
   });
 }
