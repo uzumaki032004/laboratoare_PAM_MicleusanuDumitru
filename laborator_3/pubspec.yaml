@@ -1,0 +1,25 @@
+name: learning_app_lab3
+description: 'Laboratorul 3 PAM - aplicatie de invatare cu BLoC/Cubit si date JSON incarcate asincron.'
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.8.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # State management: Cubit din pachetul BLoC.
+  flutter_bloc: ^9.1.1
+  # Comparare prin valoare pentru stari si modele.
+  equatable: ^2.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/
