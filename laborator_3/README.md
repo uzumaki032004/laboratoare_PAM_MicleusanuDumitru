@@ -42,6 +42,7 @@ laborator_3/
 │       ├── screens/               # Home, Course Overview, Lesson Details, Favorites
 │       └── widgets/               # common/, home/, course/
 └── test/                          # teste pentru modele, logică și interfață
+                                   # (scenario_test.dart: scenariul complet pe ecran de 360 px)
 ```
 
 Fluxul datelor: **JSON → Repository (async) → Cubit (emit stare) → BlocBuilder → Widget-uri**.
@@ -59,6 +60,8 @@ flutter devices
 flutter run -d ID_DISPOZITIV # emulator / telefon Android
 ```
 
+Dacă Chrome nu este instalat, se poate folosi Microsoft Edge: `flutter run -d edge`.
+
 În VS Code: **File → Open Folder → `laborator_3`**, apoi alege dispozitivul în bara de jos și apasă **F5**.
 
 Imaginile și avatarul vin de pe internet (URL-urile din JSON). Fără internet, aplicația funcționează, iar în locul imaginilor apare o pictogramă de rezervă. Pictogramele Iconify din JSON sunt desenate local cu pictogramele Material echivalente, păstrând culoarea din URL.
@@ -67,7 +70,7 @@ Imaginile și avatarul vin de pe internet (URL-urile din JSON). Fără internet,
 
 ```sh
 flutter analyze
-flutter test
+flutter test   # include scenariul complet pe un ecran îngust (360 px)
 ```
 
 Workflow-ul **Verificare laborator 3** din tabul *Actions* rulează analiza și testele și generează artifactele `learning-lab3-web` și `learning-lab3-apk`.
@@ -82,7 +85,7 @@ Workflow-ul **Verificare laborator 3** din tabul *Actions* rulează analiza și 
 6. Alege filtrul **Locked**, apoi sortarea **Longest first**.
 7. Apasă inima la o lecție, apoi pictograma inimă din bara de sus → pagina **Favorites**.
 8. Apasă o lecție → **pagina de detalii** → *Mark as completed*; înapoi în listă apare *Done* și „1 of 4 lessons completed”.
-9. Deschide lecția **Build React** (blocată) → **Enroll Now** o deblochează.
+9. Deschide lecția **Build React** (blocată) → **Enroll Now** o deblochează (pictograma Play devine portocalie).
 10. Tab-ul **Description** → textul din JSON este gol, deci se afișează starea **Empty**.
 
 ## Explicație scurtă pentru profesoară
