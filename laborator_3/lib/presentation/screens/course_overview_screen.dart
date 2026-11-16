@@ -25,65 +25,61 @@ class CourseOverviewScreen extends StatelessWidget {
   const CourseOverviewScreen({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<LessonsCubit, LessonsState>(
-        builder: (context, state) {
-          final cubit = context.read<LessonsCubit>();
-          final overview = state.overview;
-          final showContent =
-              state.status == LoadStatus.success ||
-              state.status == LoadStatus.empty;
-          return Scaffold(
-            appBar: AppBar(
-              leading: overview == null
-                  ? null
-                  : IconButton(
-                      tooltip: 'Back',
-                      onPressed: () => Navigator.of(context).maybePop(),
-                      icon: JsonIcon(overview.backIconUrl, size: 26),
-                    ),
-              title: Text(overview?.navigationTitle ?? 'Course Overview'),
-              actions: [
-                IconButton(
-                  tooltip: 'Favorites',
-                  onPressed: () => AppNavigator.openFavorites(context),
-                  icon: const Icon(Icons.favorite_border_rounded),
+  Widget build(BuildContext context) => BlocBuilder<LessonsCubit, LessonsState>(
+    builder: (context, state) {
+      final cubit = context.read<LessonsCubit>();
+      final overview = state.overview;
+      final showContent =
+          state.status == LoadStatus.success ||
+          state.status == LoadStatus.empty;
+      return Scaffold(
+        appBar: AppBar(
+          leading: overview == null
+              ? null
+              : IconButton(
+                  tooltip: 'Back',
+                  onPressed: () => Navigator.of(context).maybePop(),
+                  icon: JsonIcon(overview.backIconUrl, size: 26),
                 ),
-                DemoStatesMenu(
-                  onReload: () => cubit.load(refresh: true),
-                  onSimulateError: () => cubit.load(simulateError: true),
-                ),
-              ],
+          title: Text(overview?.navigationTitle ?? 'Course Overview'),
+          actions: [
+            IconButton(
+              tooltip: 'Favorites',
+              onPressed: () => AppNavigator.openFavorites(context),
+              icon: const Icon(Icons.favorite_border_rounded),
             ),
-            body: switch (state.status) {
-              LoadStatus.loading => const LoadingView(
-                message: 'Loading course...',
-              ),
-              LoadStatus.error => ErrorView(
-                message: state.errorMessage ?? 'Unknown error.',
-                onRetry: cubit.load,
-              ),
-              LoadStatus.success || LoadStatus.empty => _CourseContent(
-                state: state,
-              ),
-            },
-            bottomNavigationBar: overview == null || !showContent
-                ? null
-                : EnrollBar(
-                    price: overview.price,
-                    enroll: overview.enroll,
-                    enrolled: state.enrolled,
-                    onEnroll: () {
-                      cubit.enroll();
-                      AppNavigator.showMessage(
-                        context,
-                        'You are enrolled. All lessons are unlocked.',
-                      );
-                    },
-                  ),
-          );
+            DemoStatesMenu(
+              onReload: () => cubit.load(refresh: true),
+              onSimulateError: () => cubit.load(simulateError: true),
+            ),
+          ],
+        ),
+        body: switch (state.status) {
+          LoadStatus.loading => const LoadingView(message: 'Loading course...'),
+          LoadStatus.error => ErrorView(
+            message: state.errorMessage ?? 'Unknown error.',
+            onRetry: cubit.load,
+          ),
+          LoadStatus.success ||
+          LoadStatus.empty => _CourseContent(state: state),
         },
+        bottomNavigationBar: overview == null || !showContent
+            ? null
+            : EnrollBar(
+                price: overview.price,
+                enroll: overview.enroll,
+                enrolled: state.enrolled,
+                onEnroll: () {
+                  cubit.enroll();
+                  AppNavigator.showMessage(
+                    context,
+                    'You are enrolled. All lessons are unlocked.',
+                  );
+                },
+              ),
       );
+    },
+  );
 }
 
 class _CourseContent extends StatelessWidget {

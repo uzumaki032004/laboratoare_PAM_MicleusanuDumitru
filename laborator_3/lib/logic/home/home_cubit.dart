@@ -37,7 +37,6 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  HomeState _stateFor(HomePageData home) => home.learningPlan.items.isEmpty
-      ? HomeEmpty(home)
-      : HomeSuccess(home);
+  HomeState _stateFor(HomePageData home) =>
+      home.learningPlan.items.isEmpty ? HomeEmpty(home) : HomeSuccess(home);
 }

@@ -24,7 +24,11 @@ class LearnedTodayCard extends StatelessWidget {
       color: Colors.white,
       borderRadius: BorderRadius.circular(18),
       boxShadow: const [
-        BoxShadow(color: Color(0x1A101012), blurRadius: 18, offset: Offset(0, 6)),
+        BoxShadow(
+          color: Color(0x1A101012),
+          blurRadius: 18,
+          offset: Offset(0, 6),
+        ),
       ],
     ),
     child: Column(

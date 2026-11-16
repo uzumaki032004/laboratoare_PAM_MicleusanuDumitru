@@ -43,8 +43,10 @@ class LessonsState extends Equatable {
 
   int get completedCount => lessons.where((lesson) => lesson.completed).length;
 
-  int get visibleDurationSeconds =>
-      visibleLessons.fold<int>(0, (sum, lesson) => sum + lesson.durationSeconds);
+  int get visibleDurationSeconds => visibleLessons.fold<int>(
+    0,
+    (sum, lesson) => sum + lesson.durationSeconds,
+  );
 
   Lesson? lessonById(String id) {
     for (final lesson in lessons) {

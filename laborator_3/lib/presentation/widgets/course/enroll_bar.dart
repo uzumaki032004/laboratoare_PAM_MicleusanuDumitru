@@ -23,7 +23,11 @@ class EnrollBar extends StatelessWidget {
     decoration: const BoxDecoration(
       color: Colors.white,
       boxShadow: [
-        BoxShadow(color: Color(0x14101012), blurRadius: 16, offset: Offset(0, -4)),
+        BoxShadow(
+          color: Color(0x14101012),
+          blurRadius: 16,
+          offset: Offset(0, -4),
+        ),
       ],
     ),
     child: SafeArea(

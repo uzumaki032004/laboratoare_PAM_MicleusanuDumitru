@@ -27,6 +27,9 @@ void main() {
   test('simularea erorii aruncă o excepție', () async {
     final repository = AssetLearningRepository(delay: Duration.zero);
 
-    await expectLater(repository.loadData(simulateError: true), throwsA(anything));
+    await expectLater(
+      repository.loadData(simulateError: true),
+      throwsA(anything),
+    );
   });
 }

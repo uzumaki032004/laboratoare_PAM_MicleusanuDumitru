@@ -21,10 +21,7 @@ double readDouble(Map<String, dynamic> json, String key) {
 Map<String, dynamic> readMap(Map<String, dynamic> json, String key) =>
     readValue<Map<String, dynamic>>(json, key);
 
-List<Map<String, dynamic>> readMapList(
-  Map<String, dynamic> json,
-  String key,
-) {
+List<Map<String, dynamic>> readMapList(Map<String, dynamic> json, String key) {
   final list = readValue<List<dynamic>>(json, key);
   final result = <Map<String, dynamic>>[];
   for (final item in list) {
