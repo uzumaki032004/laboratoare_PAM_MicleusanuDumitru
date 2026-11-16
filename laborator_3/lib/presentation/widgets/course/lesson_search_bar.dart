@@ -7,11 +7,12 @@ import '../../../core/app_colors.dart';
 class LessonSearchBar extends StatefulWidget {
   const LessonSearchBar({
     super.key,
-    required this.initialQuery,
+    required this.query,
     required this.onChanged,
   });
 
-  final String initialQuery;
+  /// Textul curent din Cubit (de ex. golit de butonul „Reset filters”).
+  final String query;
   final ValueChanged<String> onChanged;
 
   @override
@@ -20,8 +21,21 @@ class LessonSearchBar extends StatefulWidget {
 
 class _LessonSearchBarState extends State<LessonSearchBar> {
   late final TextEditingController _controller = TextEditingController(
-    text: widget.initialQuery,
+    text: widget.query,
   );
+
+  @override
+  void didUpdateWidget(covariant LessonSearchBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Sincronizează câmpul dacă textul a fost schimbat din afara lui.
+    if (widget.query != _controller.text) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && widget.query != _controller.text) {
+          _controller.text = widget.query;
+        }
+      });
+    }
+  }
 
   @override
   void dispose() {

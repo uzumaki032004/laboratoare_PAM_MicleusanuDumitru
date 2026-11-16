@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-  const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Scaffold(body: Center(child: Text('Laboratorul 3'))),
-  ),
-);
+import 'app.dart';
+import 'data/repositories/learning_repository.dart';
+
+void main() => runApp(LearningApp(repository: AssetLearningRepository()));
