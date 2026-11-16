@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learning_app_lab3/app.dart';
+import 'package:learning_app_lab3/core/app_colors.dart';
 import 'package:learning_app_lab3/data/models/models.dart';
 import 'package:learning_app_lab3/data/repositories/learning_repository.dart';
 import 'package:learning_app_lab3/logic/lessons/lesson_query.dart';
+import 'package:learning_app_lab3/presentation/widgets/course/lesson_tile.dart';
 
 import 'helpers/test_data.dart';
 
@@ -160,6 +162,14 @@ void main() {
     await tester.tap(find.text('Enroll Now'));
     await tester.pumpAndSettle();
     expect(find.text('Enrolled'), findsOneWidget);
+    await scrollTo(tester, find.text('Build React'));
+    final playIcon = tester.widget<Icon>(
+      find.descendant(
+        of: find.widgetWithText(LessonTile, 'Build React'),
+        matching: find.byIcon(Icons.play_circle_outline_rounded),
+      ),
+    );
+    expect(playIcon.color, AppColors.primary);
     await tapVisible(tester, find.text('Build React'));
     expect(find.text('Mark as completed'), findsOneWidget);
 

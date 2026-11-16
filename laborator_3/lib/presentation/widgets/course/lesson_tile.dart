@@ -105,7 +105,13 @@ class LessonTile extends StatelessWidget {
                 color: isFavorite ? AppColors.primary : AppColors.grey,
               ),
             ),
-            JsonIcon(lesson.playIconUrl, size: 36),
+            // Culoarea palidă din JSON marchează lecția blocată; după
+            // „Enroll Now” lecția primește culoarea principală.
+            JsonIcon(
+              lesson.playIconUrl,
+              size: 36,
+              color: lesson.locked ? null : AppColors.primary,
+            ),
           ],
         ),
       ),

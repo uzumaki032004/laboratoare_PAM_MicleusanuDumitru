@@ -196,7 +196,11 @@ class _LessonPreview extends StatelessWidget {
             backgroundColor: Colors.white,
             child: lesson.locked
                 ? const Icon(Icons.lock_rounded, color: AppColors.grey)
-                : JsonIcon(lesson.playIconUrl, size: 40),
+                : JsonIcon(
+                    lesson.playIconUrl,
+                    size: 40,
+                    color: AppColors.primary,
+                  ),
           ),
         ),
       ],
